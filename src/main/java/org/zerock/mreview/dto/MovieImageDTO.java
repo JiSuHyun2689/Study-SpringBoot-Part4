@@ -1,39 +1,42 @@
 package org.zerock.mreview.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class UploadResultDTO implements Serializable {
-    
-    // 파일 업로드 결과 반환하기 위한 DTO 객체
-    private String fileName;
-    private String uuid;
-    private String folderPath;
+@NoArgsConstructor
+@Builder
+public class MovieImageDTO {
 
-    // 나중에 전체 경로가 필요한 경우를 대비해 제공
+    private String uuid;
+
+    private String imgName;
+
+    private String path;
+
     public String getImageURL(){
         try{
-            return URLEncoder.encode(folderPath+"/"+uuid+"_"+fileName,"UTF-8");
+            return URLEncoder.encode(path + "/" + uuid + "_" + imgName, "UTF-8");
         }catch (UnsupportedEncodingException e){
             e.printStackTrace();
         }
         return "";
     }
-
 
     public String getThumbnailURL(){
         try{
-            return URLEncoder.encode(folderPath + "/s_" + uuid + "_" + fileName, "UTF-8");
+            return URLEncoder.encode(path + "/s_" + uuid + "_" + imgName, "UTF-8");
         }catch (UnsupportedEncodingException e){
             e.printStackTrace();
         }
         return "";
     }
-
 }
