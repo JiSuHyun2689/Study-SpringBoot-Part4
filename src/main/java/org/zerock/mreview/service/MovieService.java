@@ -18,6 +18,8 @@ public interface MovieService {
 
     PageResultDTO<MovieDTO, Object[]> getList(PageRequestDTO requestDTO);
 
+    MovieDTO getMovie(Long mno);
+
     // MovieDTO & MovieImageDTO to Entity
     default Map<String, Object> dtoToEntity(MovieDTO movieDTO){
 

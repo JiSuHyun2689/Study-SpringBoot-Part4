@@ -112,7 +112,7 @@ public class UploadController {
 
     // 업로드 된 이미지 출력하기 위한 메서드
     @GetMapping("/display")
-    public ResponseEntity<byte[]> getFile(String fileName){
+    public ResponseEntity<byte[]> getFile(String fileName, String size){
 
         ResponseEntity<byte[]> result = null;
 
@@ -122,6 +122,10 @@ public class UploadController {
             log.info("FileName : " + srcFileName);
 
             File file = new File(uploadPath + File.separator + srcFileName);
+
+            if(size != null && size.equals("1")){
+                file = new File(file.getParent(), file.getName().substring(2));
+            }
 
             log.info("File : " + file);
 
